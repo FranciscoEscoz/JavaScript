@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main{
+    background-color: black;
+}
+
+
+.grid {
+    border: solid rgb(255, 255, 255) 6px;
+    box-shadow: inset 0 0 60px rgb(255, 0, 0),
+    0 0 100px rgb(55, 255, 0);
+    border-radius: 50px;
+    padding: 50px;
+    background-color: rgb(0, 0, 0);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 180px);
+    grid-template-areas:
+        "casillero-11 casillero-12 casillero-13 casillero-14 casillero-15"
+        "casillero-21 casillero-22 casillero-23 casillero-24 casillero-25"
+        "casillero-31 casillero-32 casillero-33 casillero-34 casillero-35";
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.cuadrado-11 {
+    grid-area: casillero-11;
+}
+
+.cuadrado-12 {
+    grid-area: casillero-12;
+}
+
+.cuadrado-13 {
+    grid-area: casillero-13;
+}
+
+.cuadrado-14 {
+    grid-area: casillero-14;
+}
+
+.cuadrado-15 {
+    grid-area: casillero-15;
+}
+
+.cuadrado-21 {
+    grid-area: casillero-21;
+}
+
+.cuadrado-22 {
+    grid-area: casillero-22;
+}
+
+.cuadrado-23 {
+    grid-area: casillero-23;
+}
+
+.cuadrado-24 {
+    grid-area: casillero-24;
+}
+
+.cuadrado-25 {
+    grid-area: casillero-25;
+}
+
+.cuadrado-31 {
+    grid-area: casillero-31;
+}
+
+.cuadrado-32 {
+    grid-area: casillero-32;
+}
+
+.cuadrado-33 {
+    grid-area: casillero-33;
+}
+
+.cuadrado-34 {
+    grid-area: casillero-34;
+}
+
+.cuadrado-35 {
+    grid-area: casillero-35;
+}
+
+.cuadrado{
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100%;
+    border: solid 1px rgb(0, 0, 0);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.conteiner {
+    padding: 5% 10%;
+}
+
+
+.boton-go{
+    text-align: center;
+    height: 50px;
+    width: 200px;
+}
+
+.boton{
+    text-align: center;
+}
+
+.credito{
+    padding: 10px 50px;
+    margin-top: 20px;
+    background-color: blanchedalmond;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    align-items: center;            /*centra en vertical*/
+    justify-content: center;        /*centra en horizontal*/
+}
+
+
+.credito-boton{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 0 30px;
+}
+
+.cuadrado p{
+    color: rgb(0, 0, 0);
+    font-size: 60px;
+    /* color: rgb(254, 5, 5); */
+    /* box-shadow:0 0 20px rgb(0, 68, 255); */
+}

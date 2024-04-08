@@ -35,8 +35,6 @@ function conexiones(ganancia, ganancia_total) {
         return 1;
 }
 
-
-
 let entrada = "a";
 
 let num1 = 0;

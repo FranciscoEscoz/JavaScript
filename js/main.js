@@ -129,8 +129,9 @@ do {
     }
 
     credito = credito - (cant_conexiones * apuesta) + ganancia;
+    console.log("Crédito:", credito);
     ganancia = 0;
     cant_conexiones = 0;
-    console.log("Crédito:", credito);
+    ganancia_total = ganancia;
     console.log("");
 } while (entrada === '' && credito >= apuesta);

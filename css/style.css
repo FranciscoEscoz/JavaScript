@@ -15,7 +15,7 @@ main{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: 3000px;
+    height: 1440px;
     width: 120px;
     border-left: solid 1px rgb(0, 0, 0);
     border-right: solid 1px rgb(0, 0, 0);
@@ -23,15 +23,12 @@ main{
 
 .columna-1{
     border-left: none;
-    transition: all 3s;
+    /* transition: 3s; */
 }
 .columna-5{
     border-right: none;
 }
-.columna-1:hover{
-    transform: translate(0,-240px);
-    /* transition: 3s; */
-}
+
 
 .marco {
     border: solid rgb(255, 255, 255) 6px;
@@ -47,17 +44,12 @@ main{
     overflow: hidden;
 }
 
-/* .columna-1{
-    border-top-left-radius: 50px;
-} */
 
 .cuadrado{
     display: flex;
-    background-color: rgba(255, 255, 255, 0.685);
+    background-color: rgba(255, 255, 255, 0.496);
     width: 120px;
     height: 120px;
-    /* border-left: solid 1px rgb(0, 0, 0);
-    border-right: solid 1px rgb(0, 0, 0); */
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -102,6 +94,20 @@ main{
 .cuadrado p{
     color: rgb(0, 0, 0);
     font-size: 60px;
-    /* color: rgb(254, 5, 5); */
-    /* box-shadow:0 0 20px rgb(0, 68, 255); */
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateY(-1080px); /* Comienza desde arriba */
+    }
+    100% {
+        transform: translateY(0px); /* Desplazamiento hacia abajo */
+    }
+}
+
+/* Reiniciar la animación cuando alcanza los 1200px hacia abajo */
+@media (max-height: 1080px) {
+    .columna-1 {
+        animation: scroll 1s linear infinite; /* Reiniciar la animación */
+    }
 }

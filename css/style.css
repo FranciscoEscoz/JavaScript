@@ -96,18 +96,18 @@ main{
     font-size: 60px;
 }
 
-@keyframes scroll {
+/* @keyframes scroll {
     0% {
-        transform: translateY(-1080px); /* Comienza desde arriba */
+        transform: translateY(-1080px);
     }
     100% {
-        transform: translateY(0px); /* Desplazamiento hacia abajo */
+        transform: translateY(0px);
     }
-}
+} */
 
 /* Reiniciar la animación cuando alcanza los 1200px hacia abajo */
-@media (max-height: 1080px) {
+/* @media (max-height: 1080px) {
     .columna-1 {
-        animation: scroll 1s linear infinite; /* Reiniciar la animación */
+        animation: scroll 1s linear infinite;
     }
-}
+} */

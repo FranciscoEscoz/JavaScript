@@ -1,7 +1,7 @@
 
 
 const apuesta = 100;
-const multiplicador = 7;
+const multiplicador = 3;
 const bloques_rodillo = 15;
 
 //el numero 6 representa el scatter que más adelante va a hacer un bonus especial. Sólo puede haber
@@ -66,7 +66,9 @@ function chequeo_tirada(num1, num2, num3, num4, num5, forma) {
         }
     }
     if(activador!=0){
-        ganancia=obtener_valor(num1)*activador;
+        let valor=obtener_valor(num1);
+        ganancia=valor*activador;
+        console.log("ganancia parcial=",ganancia,"conformado por:",valor+"*"+activador);
     }
     return ganancia;
 }
@@ -76,36 +78,37 @@ function chequeo_tirada(num1, num2, num3, num4, num5, forma) {
 const imagen = [
     {
         numero: 0,
-        valor: 10
+        valor: 5
     },
     {
         numero: 1,
-        valor: 100
+        valor: 10
     },
     {
         numero: 2,
-        valor: 200
+        valor: 20
     },
     {
         numero: 3,
-        valor: 300
+        valor: 30
     },
     {
         numero: 4,
-        valor: 400
+        valor: 40
     },
     {
         numero: 5,
-        valor: 500
+        valor: 50
     },
     {
         numero: 6,
-        valor: 1000
+        valor: 60
     },
 ]
 
 
-
+// variables a usar
+let ganancia_total=0;
 
 // creo los rodillos
 let rodillo_1 = [];
@@ -113,6 +116,8 @@ let rodillo_2 = [];
 let rodillo_3 = [];
 let rodillo_4 = [];
 let rodillo_5 = [];
+
+for(let contador=0;contador<10;contador++){
 
 // les doy valores a todas sus posiciones
 formacion_rodillo(rodillo_1);
@@ -142,16 +147,29 @@ console.log(rodillo_1[num_1 + 1] + "   " + rodillo_2[num_2 + 1] + "   " + rodill
 
 
 
+ganancia_total += chequeo_tirada(rodillo_1[num_1-1], rodillo_2[num_2-1], rodillo_3[num_3-1], rodillo_4[num_4-1],rodillo_5[num_5-1], "la fila 1");
+ganancia_total += chequeo_tirada(rodillo_1[num_1], rodillo_2[num_2], rodillo_3[num_3], rodillo_4[num_4],rodillo_5[num_5], "la fila 2");
+ganancia_total += chequeo_tirada(rodillo_1[num_1+1], rodillo_2[num_2+1], rodillo_3[num_3+1], rodillo_4[num_4+1],rodillo_5[num_5+1], "la fila 3");
+ganancia_total += chequeo_tirada(rodillo_1[num_1-1], rodillo_2[num_2], rodillo_3[num_3+1], rodillo_4[num_4],rodillo_5[num_5-1], "forma V");
+ganancia_total += chequeo_tirada(rodillo_1[num_1+1], rodillo_2[num_2], rodillo_3[num_3-1], rodillo_4[num_4],rodillo_5[num_5+1], "forma ^");
+ganancia_total += chequeo_tirada(rodillo_1[num_1-1], rodillo_2[num_2-1], rodillo_3[num_3], rodillo_4[num_4-1],rodillo_5[num_5-1], "forma ˙˙·˙˙");
+ganancia_total += chequeo_tirada(rodillo_1[num_1+1], rodillo_2[num_2+1], rodillo_3[num_3], rodillo_4[num_4+1],rodillo_5[num_5+1], "forma ..·..");
+ganancia_total += chequeo_tirada(rodillo_1[num_1], rodillo_2[num_2-1], rodillo_3[num_3-1], rodillo_4[num_4-1],rodillo_5[num_5], "forma ·˙˙˙·");
+ganancia_total += chequeo_tirada(rodillo_1[num_1], rodillo_2[num_2+1], rodillo_3[num_3+1], rodillo_4[num_4+1],rodillo_5[num_5], "forma ·...·");
+
+console.log("ganancia total:",ganancia_total);
+console.log("");
+
+}
+
+
 
 
 
 
 // ejemplo con el valor del medio del 1er rodillo
-let valorCorrespondiente = obtener_valor(rodillo_1[num_1]);
-console.log("El valor asociado al número", rodillo_1[num_1], "es:", valorCorrespondiente);
-
-
-
+// let valorCorrespondiente = obtener_valor(rodillo_1[num_1]);
+// console.log("El valor asociado al número", rodillo_1[num_1], "es:", valorCorrespondiente);
 
 
 // Obtener el primer elemento con la clase 'titulo'

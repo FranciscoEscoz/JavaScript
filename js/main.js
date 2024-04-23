@@ -8,31 +8,33 @@ const credito = 1000;
 //el numero 6 representa el scatter que más adelante va a hacer un bonus especial. Sólo puede haber
 // 1 escatter por rodillo
 
-// sólo un simbolo escatter por rodillo
+// sólo un simbolo escatter por rodillo (SIN posibilidad de 6)
 function numero_random_condicionado() {
     let numero = parseInt(Math.random() * (multiplicador - 1));
     return numero;
 }
 
+// (con posibilidad de 6)
 function numero_random() {
     let numero = parseInt(Math.random() * multiplicador);
     return numero;
 }
 
-// se selecciona una parte del rodillo que va a ser el que se va a visualizar en pantalla (entre el 1 y el 13)
+// se selecciona una parte del rodillo que va a ser el que se va a visualizar en pantalla (entre el 1 y el 22)
 function seccion_rodillo() {
     let numero = parseInt(Math.random() * (bloques_rodillo - 2) + 1);   // quito los extremos
     return numero;
 }
 
+// Función para formar los rodillos con numeros aleatorios (entre 0 y 6)
 function formacion_rodillo(vector) {
     //repetir por cada rodillo
     for (let i = 0; i < bloques_rodillo; i++) {
         if (i >= 3 && (vector[i - 2] === (multiplicador - 1) || vector[i - 1] === (multiplicador - 1))) {
-            vector.push(numero_random_condicionado());      //agrego 1-5 (sin posibilidad de 6)
+            vector.push(numero_random_condicionado());      //agrego 0-5 (sin posibilidad de 6)
         }
         else {
-            vector.push(numero_random());                       //agrego 1-6 (con posibilidad de 6)
+            vector.push(numero_random());                       //agrego 0-6 (con posibilidad de 6)
         }
 
         // console.log("vector[" + i + "] =", vector[i]);
@@ -46,7 +48,7 @@ function obtener_valor(num) {
     return resultado.valor;
 }
 
-
+// Función para chequear si hay ganancia en ese tiro
 function chequeo_tirada(num1, num2, num3, num4, num5, forma) {
     let ganancia = 0;
     let activador = 0;
@@ -75,7 +77,8 @@ function chequeo_tirada(num1, num2, num3, num4, num5, forma) {
 }
 
 
-// creo un objeto con todos las imagenes para luego linkearlas
+// creo un objeto con todos las imagenes para luego linkearlas.
+// cada numero representa un objeto con su respectivo valor
 const imagen = [
     {
         numero: 0,
@@ -163,7 +166,7 @@ while((tiradas>=1 && tiradas<=50) && tiradas != "FIN"  ){
          console.log(rodillo_1[num_1 + 1] + "   " + rodillo_2[num_2 + 1] + "   " + rodillo_3[num_3 + 1] + "   " + rodillo_4[num_4 + 1] + "   " + rodillo_5[num_5 + 1]);
      
      
-     
+        // ciclos para resumir algunas lineas de codigo ya que son similares las formas de ganar
          for (let i = -1; i < 2; i++) {
              ganancia_total += chequeo_tirada(rodillo_1[num_1 + i], rodillo_2[num_2 + i], rodillo_3[num_3 + i], rodillo_4[num_4 + i], rodillo_5[num_5 + i], "la fila " + (i + 2));
          }
@@ -185,6 +188,8 @@ while((tiradas>=1 && tiradas<=50) && tiradas != "FIN"  ){
              ganancia_total += chequeo_tirada(rodillo_1[num_1], rodillo_2[num_2 + i], rodillo_3[num_3 + i], rodillo_4[num_4 + i], rodillo_5[num_5], "forma " + forma);
              forma = "·...·";
          }
+
+
          if(ganancia_total>0){
             console.log("ganancia total:", ganancia_total);
          }
@@ -204,6 +209,7 @@ while((tiradas>=1 && tiradas<=50) && tiradas != "FIN"  ){
         console.log("finalizaron las",contador,"tiradas y su saldo final quedo en:",saldo);
     }
 
+    // incluyo un do-while dentro de otro para preguntarle al usuarios si quiere seguir jugando
     do {
         tiradas = prompt("ingrese la cantidad de tiradas a hacer entre 1 y 50: \nEscribir FIN para finalizar");
         if(((tiradas>=1 && tiradas<=50)||tiradas==="FIN" )){

@@ -15,19 +15,25 @@ main{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: 1440px;
+    height: 2760px;
     width: 120px;
     border-left: solid 1px rgb(0, 0, 0);
     border-right: solid 1px rgb(0, 0, 0);
 }
 
-.columna-1{
+/* .columna-1{
     border-left: none;
-    /* transition: 3s; */
-}
-.columna-5{
+    animation-duration: 3s;
+    animation-name: rotacion;
+    animation-timing-function: linear;
+    animation-fill-mode:forwards;
+    animation-iteration-count:3;
+    animation-delay: 0;
+} */
+
+/* .columna-5{
     border-right: none;
-}
+} */
 
 
 .marco {
@@ -96,18 +102,75 @@ main{
     font-size: 60px;
 }
 
-/* @keyframes scroll {
-    0% {
-        transform: translateY(-1080px);
+
+
+.columna-1{
+    border-left: none;
+    animation-duration: 2s;
+    animation-name: rotacion;
+    animation-timing-function: linear;
+    animation-fill-mode:forwards;
+    animation-iteration-count: 3;
+    animation-delay: 0;
+}
+.columna-2{
+    animation-duration: 2s;
+    animation-name: rotacion;
+    animation-timing-function: linear;
+    animation-fill-mode:forwards;
+    animation-iteration-count: 4.95;
+    animation-delay: 1.2s;
+}
+.columna-3{
+    animation-duration: 2s;
+    animation-name: rotacion;
+    animation-timing-function: linear;
+    animation-fill-mode:forwards;
+    animation-iteration-count: 5.5;
+    animation-delay: 2.4s;
+}
+.columna-4{
+    animation-duration: 2s;
+    animation-name: rotacion;
+    animation-timing-function: linear;
+    animation-fill-mode:forwards;
+    animation-iteration-count: 6.95;
+    animation-delay: 3.6s;
+}
+.columna-5{
+    border-left: none;
+    animation-duration: 2s;
+    animation-name: rotacion;
+    animation-timing-function: linear;
+    animation-fill-mode:forwards;
+    animation-iteration-count: 7;
+    animation-delay: 4.8s;
+}
+
+
+@keyframes rotacion {
+    from {
+        transform: translateY(-2400px);
     }
-    100% {
+  
+    to {
         transform: translateY(0px);
     }
-} */
+  }
+
+
+
+
 
 /* Reiniciar la animación cuando alcanza los 1200px hacia abajo */
-/* @media (max-height: 1080px) {
+/* @media (max-height: 0px) {
     .columna-1 {
-        animation: scroll 1s linear infinite;
+        animation-delay: 1s;
+        animation-duration: 5s;
+        animation-name: rotacion;
+        animation-timing-function:ease-in-out;
+        animation-iteration-count: 0.5;
+        animation-fill-mode: forwards;
+        animation-delay: 0;
     }
 } */

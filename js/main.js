@@ -1,5 +1,3 @@
-
-
 const apuesta = 50;
 const multiplicador = 7;
 const bloques_rodillo = 23;

@@ -110,15 +110,15 @@ const imagen = [
 
 // variables a usar
 let ganancia_total = 0;
-let tiradas=0;
-let saldo=credito;
-let contador_total=0;
-let contador=0;
+let tiradas = 0;
+let saldo = credito;
+let contador_total = 0;
+let contador = 0;
 
-alert("Esto es una cuenta DEMO y tiene $"+credito+". \nCada apuesta realizada es de $"+apuesta);
+alert("Esto es una cuenta DEMO y tiene $" + credito + ". \nCada apuesta realizada es de $" + apuesta);
 
 
-console.log("Saldo inicial:",saldo);
+console.log("Saldo inicial:", saldo);
 
 // creo los rodillos
 let rodillo_1 = [];
@@ -129,92 +129,92 @@ let rodillo_5 = [];
 
 do {
     tiradas = prompt("ingrese la cantidad de tiradas a hacer entre 1 y 50: ");
-} while (tiradas<1 || tiradas>50);
+} while (tiradas < 1 || tiradas > 50);
 
-while((tiradas>=1 && tiradas<=50) && tiradas != "FIN"  ){
-    
-    
+while ((tiradas >= 1 && tiradas <= 50) && tiradas != "FIN") {
+
+
     do {
-        contador+=1;
-        console.log("tirada numero:",contador);
-         // les doy valores a todas sus posiciones
-         formacion_rodillo(rodillo_1);
-         formacion_rodillo(rodillo_2);
-         formacion_rodillo(rodillo_3);
-         formacion_rodillo(rodillo_4);
-         formacion_rodillo(rodillo_5);
-     
-         // creo variable que va a seleccionar la parte de cada arreglo
-         let num_1;
-         let num_2;
-         let num_3;
-         let num_4;
-         let num_5;
-     
-         // de forma elatoria seleciona parte del rodillo
-         num_1 = seccion_rodillo();
-         num_2 = seccion_rodillo();
-         num_3 = seccion_rodillo();
-         num_4 = seccion_rodillo();
-         num_5 = seccion_rodillo();
-     
-         // es la forma que tengo de poder comprobar el correcto funcionamiento
-         console.log(rodillo_1[num_1 - 1] + "   " + rodillo_2[num_2 - 1] + "   " + rodillo_3[num_3 - 1] + "   " + rodillo_4[num_4 - 1] + "   " + rodillo_5[num_5 - 1]);
-         console.log(rodillo_1[num_1] + "   " + rodillo_2[num_2] + "   " + rodillo_3[num_3] + "   " + rodillo_4[num_4] + "   " + rodillo_5[num_5]);
-         console.log(rodillo_1[num_1 + 1] + "   " + rodillo_2[num_2 + 1] + "   " + rodillo_3[num_3 + 1] + "   " + rodillo_4[num_4 + 1] + "   " + rodillo_5[num_5 + 1]);
-     
-     
-     
-         for (let i = -1; i < 2; i++) {
-             ganancia_total += chequeo_tirada(rodillo_1[num_1 + i], rodillo_2[num_2 + i], rodillo_3[num_3 + i], rodillo_4[num_4 + i], rodillo_5[num_5 + i], "la fila " + (i + 2));
-         }
-     
-         let forma = "V";
-         for (let i = -1; i < 2; i += 2) {
-             ganancia_total += chequeo_tirada(rodillo_1[num_1 + i], rodillo_2[num_2], rodillo_3[num_3 - i], rodillo_4[num_4], rodillo_5[num_5 + i], "forma " + forma);
-             forma = "^";
-         }
-     
-         forma = "˙˙·˙˙";
-         for (let i = -1; i < 2; i += 2) {
-             ganancia_total += chequeo_tirada(rodillo_1[num_1 + i], rodillo_2[num_2 + i], rodillo_3[num_3], rodillo_4[num_4 + i], rodillo_5[num_5 + i], "forma " + forma);
-             forma = "..·..";
-         }
-     
-         forma = "·˙˙˙·";
-         for (let i = -1; i < 2; i += 2) {
-             ganancia_total += chequeo_tirada(rodillo_1[num_1], rodillo_2[num_2 + i], rodillo_3[num_3 + i], rodillo_4[num_4 + i], rodillo_5[num_5], "forma " + forma);
-             forma = "·...·";
-         }
-         if(ganancia_total>0){
+        contador += 1;
+        console.log("tirada numero:", contador);
+        // les doy valores a todas sus posiciones
+        formacion_rodillo(rodillo_1);
+        formacion_rodillo(rodillo_2);
+        formacion_rodillo(rodillo_3);
+        formacion_rodillo(rodillo_4);
+        formacion_rodillo(rodillo_5);
+
+        // creo variable que va a seleccionar la parte de cada arreglo
+        let num_1;
+        let num_2;
+        let num_3;
+        let num_4;
+        let num_5;
+
+        // de forma elatoria seleciona parte del rodillo
+        num_1 = seccion_rodillo();
+        num_2 = seccion_rodillo();
+        num_3 = seccion_rodillo();
+        num_4 = seccion_rodillo();
+        num_5 = seccion_rodillo();
+
+        // es la forma que tengo de poder comprobar el correcto funcionamiento
+        console.log(rodillo_1[num_1 - 1] + "   " + rodillo_2[num_2 - 1] + "   " + rodillo_3[num_3 - 1] + "   " + rodillo_4[num_4 - 1] + "   " + rodillo_5[num_5 - 1]);
+        console.log(rodillo_1[num_1] + "   " + rodillo_2[num_2] + "   " + rodillo_3[num_3] + "   " + rodillo_4[num_4] + "   " + rodillo_5[num_5]);
+        console.log(rodillo_1[num_1 + 1] + "   " + rodillo_2[num_2 + 1] + "   " + rodillo_3[num_3 + 1] + "   " + rodillo_4[num_4 + 1] + "   " + rodillo_5[num_5 + 1]);
+
+
+
+        for (let i = -1; i < 2; i++) {
+            ganancia_total += chequeo_tirada(rodillo_1[num_1 + i], rodillo_2[num_2 + i], rodillo_3[num_3 + i], rodillo_4[num_4 + i], rodillo_5[num_5 + i], "la fila " + (i + 2));
+        }
+
+        let forma = "V";
+        for (let i = -1; i < 2; i += 2) {
+            ganancia_total += chequeo_tirada(rodillo_1[num_1 + i], rodillo_2[num_2], rodillo_3[num_3 - i], rodillo_4[num_4], rodillo_5[num_5 + i], "forma " + forma);
+            forma = "^";
+        }
+
+        forma = "˙˙·˙˙";
+        for (let i = -1; i < 2; i += 2) {
+            ganancia_total += chequeo_tirada(rodillo_1[num_1 + i], rodillo_2[num_2 + i], rodillo_3[num_3], rodillo_4[num_4 + i], rodillo_5[num_5 + i], "forma " + forma);
+            forma = "..·..";
+        }
+
+        forma = "·˙˙˙·";
+        for (let i = -1; i < 2; i += 2) {
+            ganancia_total += chequeo_tirada(rodillo_1[num_1], rodillo_2[num_2 + i], rodillo_3[num_3 + i], rodillo_4[num_4 + i], rodillo_5[num_5], "forma " + forma);
+            forma = "·...·";
+        }
+        if (ganancia_total > 0) {
             console.log("ganancia total:", ganancia_total);
-         }
-         saldo = saldo-apuesta+ganancia_total;
-         console.log("saldo total:", saldo);
-         console.log("");
-        tiradas-=1;
-        
-        ganancia_total=0;
-    } while (tiradas>0 && saldo>=apuesta);
-    
-    
-    if(saldo<apuesta){
+        }
+        saldo = saldo - apuesta + ganancia_total;
+        console.log("saldo total:", saldo);
+        console.log("");
+        tiradas -= 1;
+
+        ganancia_total = 0;
+    } while (tiradas > 0 && saldo >= apuesta);
+
+
+    if (saldo < apuesta) {
         console.log("Su saldo es menor al valor de la apuesta");
     }
-    else{
-        console.log("finalizaron las",contador,"tiradas y su saldo final quedo en:",saldo);
+    else {
+        console.log("finalizaron las", contador, "tiradas y su saldo final quedo en:", saldo);
     }
 
     do {
         tiradas = prompt("ingrese la cantidad de tiradas a hacer entre 1 y 50: \nEscribir FIN para finalizar");
-        if(((tiradas>=1 && tiradas<=50)||tiradas==="FIN" )){
-            contador_total+=contador;
-            contador=0;
+        if (((tiradas >= 1 && tiradas <= 50) || tiradas === "FIN")) {
+            contador_total += contador;
+            contador = 0;
         }
-    } while ( ((tiradas<1 || tiradas>50 || saldo<apuesta) && tiradas!="FIN"));
+    } while (((tiradas < 1 || tiradas > 50 || saldo < apuesta) && tiradas != "FIN"));
 }
 
-console.log("en un total de",contador_total,"tiradas, el saldo final es de: ",saldo);
+console.log("en un total de", contador_total, "tiradas, el saldo final es de: ", saldo);
 
 
 // ganancia_total += chequeo_tirada(rodillo_1[num_1-1], rodillo_2[num_2-1], rodillo_3[num_3-1], rodillo_4[num_4-1],rodillo_5[num_5-1], "la fila 1");
@@ -240,3 +240,15 @@ console.log("en un total de",contador_total,"tiradas, el saldo final es de: ",sa
 // titulo.innerText = 'H';
 
 
+/* Reiniciar la animación cuando alcanza los 1200px hacia abajo */
+/* @media (max-height: 0px) {
+    .columna-1 {
+        animation-delay: 1s;
+        animation-duration: 5s;
+        animation-name: rotacion;
+        animation-timing-function:ease-in-out;
+        animation-iteration-count: 0.5;
+        animation-fill-mode: forwards;
+        animation-delay: 0;
+    }
+} */

@@ -384,26 +384,25 @@ let ordenImagenes = [
 
 
 //constantes
-const bloques_rodillo = parseInt(10);
-const multiplicador = parseInt(6);    // cantidad de logos
-const apuesta_minima = parseInt(100);
-const apuesta_maxima = parseInt(1500);
-const saldo_inicial = parseInt(1000);
+const bloques_rodillo = 10;
+const multiplicador = 6;    // cantidad de logos
+const apuesta_minima = 100;
+const apuesta_maxima = 1500;
 
 // variables a usar
-let ganancia_total = parseInt(0);
-let tiradas = parseInt(0);
-let contador_total = parseInt(0);
-let contador = parseInt(0);
-let num_vueltas = parseInt(0);
+let ganancia_total = 0;
+let tiradas = 0;
+let contador_total = 0;
+let contador = 0;
+let num_vueltas = 0;
 
 // Variable global de estado para rastrear si la animación está en curso
 let animationInProgress = false;
 
 // Variable global del saldo
 if (!localStorage.getItem('fondo')) {
-    // Si no hay nada guardado en 'fondo', asignar 'saldo_inicial' a 'fondo' y guardarlo en localStorage
-    let saldo = saldo_inicial;
+    // Si no hay nada guardado en 'fondo', asignar el valor 0 a 'fondo' y guardarlo en localStorage
+    let saldo = 0;
     localStorage.setItem('fondo', saldo);
 } else {
     saldo = JSON.parse(localStorage.getItem("fondo"));

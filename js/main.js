@@ -1,5 +1,4 @@
 
-
 // me permite borrar toda la info que tenía para luego colocarle nueva
 function vaciar_matriz(matriz) {
     for (let k = 0; k < 5;) {
@@ -12,7 +11,7 @@ function vaciar_matriz(matriz) {
     }
 }
 
-
+// formar la matriz pertinente
 function formacion_matriz(matriz) {
     vaciar_matriz(matriz);              // limpio matriz para volverla a construir con otros numeros
     let i = 0;
@@ -52,7 +51,6 @@ function obtener_valor(num) {
 }
 
 
-
 function chequeo(vector, posicion) {
     let ganancia = 0;
     for (let i = 0; i < 3; i++) {
@@ -64,7 +62,6 @@ function chequeo(vector, posicion) {
         ganancia += chequeo_tirada(vector[0][posicion + i], vector[1][posicion + 1], vector[2][posicion + 2 - i], vector[3][posicion + 1], vector[4][posicion + i], "forma " + forma);
         forma = "^";
     }
-
 
     forma = "˙˙·˙˙";
     for (let i = 0; i < 3; i += 2) {
@@ -80,7 +77,7 @@ function chequeo(vector, posicion) {
     return ganancia;
 }
 
-
+// chequeo_tirada_X me permite obtener valores correctos teniendo en cuenta que puede haber scatters(comodines)
 function chequeo_tirada_1(num1, num2, num3, num4, num5, comodin) {
     let cantidad = 0;
     if ((num1 === num2 || num2 === comodin) && (num1 === num3 || num3 === comodin)) {
@@ -205,13 +202,13 @@ function inicial(vector, num) {
             agregarDivs(columna, ordenImagenes[index]);
         }
         else {
-            actualizarImagenes(vector);
+            actualizar_imagenes(vector);
         }
     });
     return 1;
 }
 
-function actualizarImagenes(matriz) {
+function actualizar_imagenes(matriz) {
     // Obtener todos los divs
     const divs = document.querySelectorAll('.cuadrado img');
 
@@ -233,7 +230,6 @@ function actualizarImagenes(matriz) {
     });
 }
 
-
 function eliminar_texto_ganancia() {
     // Seleccionar el contenedor que contiene los elementos <p> que quieres eliminar
     const contenedor = document.getElementById("mostrar_ganancia");
@@ -248,7 +244,7 @@ function eliminar_texto_ganancia() {
 }
 
 
-// Función para aplicar la animación a todos los rodillos (activada por el boton)
+// Función principal para aplicar la animación a todos los rodillos (activada por el boton)
 function animateElements(elements, activador, vector, apuesta) {
     let ganancia = 0;
     // Verifica si la animación está en curso
@@ -339,7 +335,7 @@ function disminuirCredito(apuesta) {
 }
 
 
-//FALTA FUNCION PARA ANIMAR LOS CUADRADOS QUE GENERAN LA VICTORIA
+// codigo main
 const imagenes = [
     {
         numero: 0,
@@ -348,7 +344,7 @@ const imagenes = [
     },
     {
         numero: 1,
-        valor: 1,
+        valor: 2,
         imagen: 'assets/targaryen.png'
     },
     {
@@ -358,21 +354,20 @@ const imagenes = [
     },
     {
         numero: 3,
-        valor: 2,
+        valor: 3,
         imagen: 'assets/stark.png'
     },
     {
         numero: 4,
-        valor: 3,
+        valor: 4,
         imagen: 'assets/cuervo.png'
     },
     {
         numero: 5,
-        valor: 5,
+        valor: 8,
         imagen: 'assets/trono.png'
     },
 ];
-
 
 let ordenImagenes = [
     [],
@@ -381,7 +376,6 @@ let ordenImagenes = [
     [],
     []
 ];
-
 
 //constantes
 const bloques_rodillo = 10;
@@ -419,8 +413,6 @@ if (!localStorage.getItem('credito')) {
     apuesta = JSON.parse(localStorage.getItem("credito"));
 }
 
-
-
 let saldoElemento = document.getElementById("saldo");
 saldoElemento.textContent = "saldo: " + saldo;
 
@@ -433,7 +425,6 @@ num_vueltas = inicial(ordenImagenes, num_vueltas);
 // constantes del boton para animar las columnas
 const button = document.getElementById('btngo');
 const boxes = document.querySelectorAll('.columna');
-
 
 
 // Agrega un "escuchador de eventos" al botón que se activa cuando el botón es clicado

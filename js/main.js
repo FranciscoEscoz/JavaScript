@@ -15,7 +15,6 @@ function vaciar_matriz(matriz) {
 
 function formacion_matriz(matriz) {
     vaciar_matriz(matriz);              // limpio matriz para volverla a construir con otros numeros
-    // console.log(matriz.length);         // chequeo que este vacia
     let i = 0;
     for (let k = 0; k < 5;) {
         if (i < bloques_rodillo) {       // que tengo que escribir?
@@ -25,13 +24,11 @@ function formacion_matriz(matriz) {
             else {
                 matriz[k].push(numero_random());                       //agrego 0-6 (con posibilidad de 6)
             }
-            console.log("elemento en [" + k + "][" + i + "]:", matriz[k][i]);
             i++;
         }
         else {
             k++;
             i = 0;
-            console.log("");
         }
     }
 }
@@ -84,8 +81,8 @@ function chequeo(vector, posicion) {
 }
 
 
-function chequeo_tirada_1(num1, num2, num3, num4, num5, comodin){
-    let cantidad=0;
+function chequeo_tirada_1(num1, num2, num3, num4, num5, comodin) {
+    let cantidad = 0;
     if ((num1 === num2 || num2 === comodin) && (num1 === num3 || num3 === comodin)) {
         if (num1 === num4 || num4 === comodin) {
             if (num1 === num5) {
@@ -102,8 +99,8 @@ function chequeo_tirada_1(num1, num2, num3, num4, num5, comodin){
     return cantidad;
 }
 
-function chequeo_tirada_2(num2, num4, num5, comodin){
-    let cantidad=0;
+function chequeo_tirada_2(num2, num4, num5, comodin) {
+    let cantidad = 0;
     if (num2 === num4 || num4 === comodin) {
         if (num2 === num5) {
             cantidad = 5;
@@ -118,8 +115,8 @@ function chequeo_tirada_2(num2, num4, num5, comodin){
     return cantidad;
 }
 
-function chequeo_tirada_3(num3, num4, num5, comodin){
-    let cantidad=0;
+function chequeo_tirada_3(num3, num4, num5, comodin) {
+    let cantidad = 0;
     if (num3 === num4 || num4 === comodin) {
         if (num3 === num5) {
             cantidad = 5;
@@ -134,9 +131,9 @@ function chequeo_tirada_3(num3, num4, num5, comodin){
     return cantidad;
 }
 
-function chequeo_tirada_4(num4, num5, comodin){
-    let cantidad=0;
-    if (num4 === num5 || num5===comodin) {
+function chequeo_tirada_4(num4, num5, comodin) {
+    let cantidad = 0;
+    if (num4 === num5 || num5 === comodin) {
         cantidad = 5;
     }
     else {
@@ -149,23 +146,22 @@ function chequeo_tirada_4(num4, num5, comodin){
 function chequeo_tirada(num1, num2, num3, num4, num5, forma) {
     let valor = 0;
     let comodin = multiplicador - 1;
-    console.log(num1, num2, num3, num4, num5, forma);
     let ganancia = 0;
     let cantidad = 0;
     if (num1 != comodin) {
-        cantidad=chequeo_tirada_1(num1, num2, num3, num4, num5, comodin);
+        cantidad = chequeo_tirada_1(num1, num2, num3, num4, num5, comodin);
         valor = obtener_valor(num1);
     }
     else if (num1 === comodin && num2 != comodin && (num2 === num3 || num3 === comodin)) {
-        cantidad=chequeo_tirada_2(num2, num4, num5, comodin);
+        cantidad = chequeo_tirada_2(num2, num4, num5, comodin);
         valor = obtener_valor(num2);
     }
     else if (num1 === comodin && num2 === comodin && num3 != comodin) {
-        cantidad=chequeo_tirada_3(num3, num4, num5, comodin);
+        cantidad = chequeo_tirada_3(num3, num4, num5, comodin);
         valor = obtener_valor(num3);
     }
     else if (num1 === comodin && num2 === comodin && num3 === comodin && num4 != comodin) {
-        cantidad=chequeo_tirada_4(num4, num5, comodin);
+        cantidad = chequeo_tirada_4(num4, num5, comodin);
         valor = obtener_valor(num4);
     }
     else if (num1 === comodin && num2 === comodin && num3 === comodin && num4 === comodin) {
@@ -173,10 +169,8 @@ function chequeo_tirada(num1, num2, num3, num4, num5, forma) {
         valor = obtener_valor(num5);
     }
 
-
     if (cantidad != 0) {
         ganancia = valor * cantidad * apuesta / 10;
-        // console.log("ganancia parcial=", ganancia, "conformado por:", valor + "*" + cantidad + "*" + apuesta / 10);
         imprime_ganancia(cantidad, forma, ganancia);
     }
     return ganancia;
@@ -304,7 +298,7 @@ function animateElements(elements, activador, vector, apuesta) {
         setTimeout(() => {
             animationInProgress = false;
             saldo = calcular_saldo(ganancia, apuesta);
-        }, 2000); // Duración de la animación en milisegundos
+        }, 2000);
     }
     return activador;
 }
@@ -325,8 +319,8 @@ function imprimir_saldo(saldo_actual) {
 // Función para aumentar el crédito
 function aumentarCredito(apuesta) {
     let apuestaElemento = document.getElementById("apuesta");
-    if (apuesta != apuesta_maxima) {
-        apuesta += 10;
+    if (apuesta < apuesta_maxima) {
+        apuesta += 50;
     }
     // Actualizar el texto del elemento h2
     apuestaElemento.textContent = "crédito: " + apuesta;
@@ -336,8 +330,8 @@ function aumentarCredito(apuesta) {
 // Función para disminuir el crédito
 function disminuirCredito(apuesta) {
     let apuestaElemento = document.getElementById("apuesta");
-    if (apuesta != apuesta_minima) {
-        apuesta -= 10;
+    if (apuesta > apuesta_minima) {
+        apuesta -= 50;
     }
     // Actualizar el texto del elemento h2
     apuestaElemento.textContent = "crédito: " + apuesta;
@@ -350,38 +344,33 @@ const imagenes = [
     {
         numero: 0,
         valor: 1,
-        imagen: 'lannister.png'
+        imagen: 'assets/lannister.png'
     },
     {
         numero: 1,
-        valor: 2,
-        imagen: 'targaryen.png'
+        valor: 1,
+        imagen: 'assets/targaryen.png'
     },
     {
         numero: 2,
         valor: 2,
-        imagen: 'baratheon.png'
+        imagen: 'assets/baratheon.png'
     },
     {
         numero: 3,
-        valor: 5,
-        imagen: 'stark.png'
+        valor: 2,
+        imagen: 'assets/stark.png'
     },
     {
         numero: 4,
-        valor: 8,
-        imagen: 'cuervo.png'
+        valor: 3,
+        imagen: 'assets/cuervo.png'
     },
     {
         numero: 5,
-        valor: 10,
-        imagen: 'trono.png'
+        valor: 5,
+        imagen: 'assets/trono.png'
     },
-    {
-        numero: 6,
-        valor: 20,
-        imagen: 'imagen6.jpeg'
-    }
 ];
 
 
@@ -395,20 +384,18 @@ let ordenImagenes = [
 
 
 //constantes
-const bloques_rodillo = 10;
-const multiplicador = 6;    // cantidad de logos
-const apuesta_minima = 10;
-const apuesta_maxima = 250; // valor cercano para probar que funcione bien
+const bloques_rodillo = parseInt(10);
+const multiplicador = parseInt(6);    // cantidad de logos
+const apuesta_minima = parseInt(100);
+const apuesta_maxima = parseInt(1500);
+const saldo_inicial = parseInt(1000);
 
 // variables a usar
-let ganancia_total = 0;
-let tiradas = 0;
-let contador_total = 0;
-let contador = 0;
-let num_vueltas = 0;
-let apuesta_inicial = 50;
-let saldo_inicial = 1000;
-let apuesta;
+let ganancia_total = parseInt(0);
+let tiradas = parseInt(0);
+let contador_total = parseInt(0);
+let contador = parseInt(0);
+let num_vueltas = parseInt(0);
 
 // Variable global de estado para rastrear si la animación está en curso
 let animationInProgress = false;
@@ -425,8 +412,8 @@ if (!localStorage.getItem('fondo')) {
 
 // Variable del monto a apostar
 if (!localStorage.getItem('credito')) {
-    // Si no hay nada guardado en 'credito', asignar 'apuesta_inicial' a 'apuesta' y guardarlo en localStorage
-    apuesta = apuesta_inicial;
+    // Si no hay nada guardado en 'credito', asignar 'apuesta_minima' a 'apuesta' y guardarlo en localStorage
+    let apuesta = apuesta_minima;
     localStorage.setItem('credito', apuesta);
 } else {
     // Si ya hay algo guardado en 'credito', obtenerlo y asignarlo a 'apuesta'

@@ -502,7 +502,6 @@ button.addEventListener('click', () => {
         // Llamo a la funcion de animacion y de la que deriva todo
         contador = animateElements(boxes, contador, ordenImagenes, apuesta);
     }
-
 });
 
 

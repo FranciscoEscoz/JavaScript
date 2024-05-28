@@ -76,7 +76,7 @@ function opciones_scatters(matriz, posicion) {
 
 function coloco_scatters(matriz, posicion) {
     // me sirve para las 2 rotaciones
-    let numero = parseInt(Math.random() * 2);
+    let numero = parseInt(Math.random() * 3);
     matriz[posicion][0 + numero] = multiplicador - 1;
     matriz[posicion][3 + numero] = multiplicador - 1;
     return 1;

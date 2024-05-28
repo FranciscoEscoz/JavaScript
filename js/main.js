@@ -407,22 +407,22 @@ const imagenes = [
     {
         numero: 2,
         valor: 3,
-        imagen: '../assets/baratheon.png'
+        imagen: 'assets/baratheon.png'
     },
     {
         numero: 3,
         valor: 3,
-        imagen: '../assets/stark.png'
+        imagen: 'assets/stark.png'
     },
     {
         numero: 4,
         valor: 5,
-        imagen: '../assets/cuervo.png'
+        imagen: 'assets/cuervo.png'
     },
     {
         numero: 5,
         valor: 8,
-        imagen: '../assets/trono.png'
+        imagen: 'assets/trono.png'
     },
 ];
 

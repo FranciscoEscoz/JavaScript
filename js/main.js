@@ -466,10 +466,9 @@ if (!localStorage.getItem('fondo')) {
 }
 
 // Variable del monto a apostar
-let apuesta = 0;
+let apuesta = apuesta_minima;
 if (!localStorage.getItem('credito')) {
-    // Si no hay nada guardado en 'credito', asignar 'apuesta_minima' a 'apuesta' y guardarlo en localStorage
-    let apuesta = apuesta_minima;
+    // Si no hay nada guardado en 'credito', se guardado en localStorage el valor de la apuesta minima
     localStorage.setItem('credito', apuesta);
 } else {
     // Si ya hay algo guardado en 'credito', obtenerlo y asignarlo a 'apuesta'

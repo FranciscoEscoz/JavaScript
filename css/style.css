@@ -26,44 +26,12 @@ h1 {
     /* Ajustar el ancho del encabezado según sea necesario */
 }
 
-.ventana {
-    display: none;
-    width: 500px;
-    position: absolute;
-    top: 250px;
-    z-index: 2;
-}
-
-.ventana_conteiner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* text-align: center; */
-    height: 120px;
-    background-color: rgb(255, 255, 255);
-}
-
-.ventana p {
-    color: black;
-    font-size: 30px;
-    padding-bottom: 10px;
-}
-
-.boton-cerrar {
-    height: 40px;
-    width: 90px;
-    font-size: 25px;
-    background-color: rgba(137, 255, 149, 0.576);
-}
-
-
 .input-button-container {
     align-items: center;
     display: flex;
 }
 
-.boton-deposito {
+.boton-header {
     height: 30px;
     width: 130px;
     font-size: 20px;
@@ -74,6 +42,8 @@ input {
     margin-left: 10px;
     height: 30px;
     width: 20%;
+    color: black;
+    font-size: 20px;
 }
 
 label {
@@ -83,10 +53,17 @@ label {
     color: aliceblue;
 }
 
-#deposito {
+/* #deposito {
     color: black;
     font-size: 20px;
+} */
+
+.custom-button {
+    background-color: rgba(103, 255, 151, 0.795) !important;
+    color: black !important;
+    border: solid 2px rgb(255, 0, 0) !important;
 }
+
 
 #saldo {
     padding-top: 10px;
@@ -103,6 +80,10 @@ p {
 
 #mostrar_ganancia p {
     font-size: 18px;
+}
+
+#credito-especial {
+    padding-left: 10px;
 }
 
 .columna {
@@ -147,7 +128,7 @@ img {
 }
 
 .conteiner {
-    padding: 5% 10%;
+    padding: 5% 8%;
 }
 
 .boton-go {
@@ -174,6 +155,7 @@ img {
 }
 
 .apuesta {
+    width: 50%;
     margin-top: 10px;
     background-color: blanchedalmond;
     text-align: center;
@@ -184,6 +166,13 @@ img {
     width: 50px;
     border-radius: 50%;
     margin: 0 30px;
+}
+
+#btn-tirada-especial {
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+
 }
 
 .columna-1 {
@@ -334,4 +323,30 @@ img {
         transform: translateY(0px);
 
     }
+}
+
+
+li {
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    padding: 10px;
+    margin: 10px 30px;
+}
+
+
+#btn-inf {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: blanchedalmond;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    cursor: pointer;
 }

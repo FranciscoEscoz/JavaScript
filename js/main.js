@@ -18,10 +18,10 @@ function formacion_matriz(matriz) {
     for (let k = 0; k < 5;) {
         if (i < bloques_rodillo) {       // que tengo que escribir?
             if (i === 0 || i === 1 || (i >= 3 && (matriz[k][i - 2] === (multiplicador - 1) || matriz[k][i - 1] === (multiplicador - 1)))) {
-                matriz[k].push(numero_random_condicionado());      //agrego 0-5 (sin posibilidad de 6)
+                matriz[k].push(numero_random_condicionado());      //agrego 0-5 (sin posibilidad de 5)
             }
             else {
-                matriz[k].push(numero_random());                       //agrego 0-6 (con posibilidad de 6)
+                matriz[k].push(numero_random());                       //agrego 0-6 (con posibilidad de 5)
             }
             i++;
         }
@@ -30,15 +30,65 @@ function formacion_matriz(matriz) {
             i = 0;
         }
     }
+    if (tirada_especial === true) {
+        multiple_tirada(matriz);
+        tirada_especial = false;
+    }
 }
 
-// sólo un simbolo escatter por rodillo (SIN posibilidad de 6)
+function multiple_tirada(matriz) {
+    let cant = parseInt(Math.random() * multiplicador);   //minimo 3 scatters en diferentes columnas
+    if (cant < 4) {
+        cant = 3;
+    }
+    chequeo_scatters(matriz, cant);     // le paso la matriz y la cantidad de scatters a colocar
+}
+
+function chequeo_scatters(matriz, cant) {   // cant es la cantidad de scatters
+    let control = 0;
+    let control_2 = 0;
+    cant_fija = cant;
+    for (let i = 0; control < cant_fija; i++) {          // donde pongo los scatters?
+        if (cant < rodillos - i) {
+            control_2 = control;
+            control += opciones_scatters(matriz, i); // le paso la matriz y la columna donde poner el scatter (opcional)
+            if (control_2 != control) {
+                cant--;
+            }
+        }
+        else {
+            control += coloco_scatters(matriz, i);  // caso cuando si o si tengo que poner los scatters
+            cant--;
+        }
+    }
+    return 0;
+}
+
+function opciones_scatters(matriz, posicion) {
+    let numero = parseInt(Math.random() * multiplicador);
+    if (numero >= 4) {
+        coloco_scatters(matriz, posicion);
+        return 1;
+    }
+    return 0;
+}
+
+
+function coloco_scatters(matriz, posicion) {
+    // me sirve para las 2 rotaciones
+    let numero = parseInt(Math.random() * 2);
+    matriz[posicion][0 + numero] = multiplicador - 1;
+    matriz[posicion][3 + numero] = multiplicador - 1;
+    return 1;
+}
+
+// sólo un simbolo escatter por rodillo (SIN posibilidad de 5)
 function numero_random_condicionado() {
     let numero = parseInt(Math.random() * (multiplicador - 1));
     return numero;
 }
 
-// (con posibilidad de 6)
+// (con posibilidad de 5)
 function numero_random() {
     let numero = parseInt(Math.random() * multiplicador);
     return numero;
@@ -82,7 +132,7 @@ function chequeo_tirada_1(num1, num2, num3, num4, num5, comodin) {
     let cantidad = 0;
     if ((num1 === num2 || num2 === comodin) && (num1 === num3 || num3 === comodin)) {
         if (num1 === num4 || num4 === comodin) {
-            if (num1 === num5) {
+            if (num1 === num5 || num5 === comodin) {
                 cantidad = 5;
             }
             else {
@@ -99,7 +149,7 @@ function chequeo_tirada_1(num1, num2, num3, num4, num5, comodin) {
 function chequeo_tirada_2(num2, num4, num5, comodin) {
     let cantidad = 0;
     if (num2 === num4 || num4 === comodin) {
-        if (num2 === num5) {
+        if (num2 === num5 || num5 === comodin) {
             cantidad = 5;
         }
         else {
@@ -115,7 +165,7 @@ function chequeo_tirada_2(num2, num4, num5, comodin) {
 function chequeo_tirada_3(num3, num4, num5, comodin) {
     let cantidad = 0;
     if (num3 === num4 || num4 === comodin) {
-        if (num3 === num5) {
+        if (num3 === num5 || num5 === comodin) {
             cantidad = 5;
         }
         else {
@@ -246,6 +296,9 @@ function eliminar_texto_ganancia() {
 
 // Función principal para aplicar la animación a todos los rodillos (activada por el boton)
 function animateElements(elements, activador, vector, apuesta) {
+    if (tirada_especial === true) {
+        apuesta = apuesta * multi_tirada_especial;
+    }
     let ganancia = 0;
     // Verifica si la animación está en curso
     if (!animationInProgress) {
@@ -314,23 +367,27 @@ function imprimir_saldo(saldo_actual) {
 
 // Función para aumentar el crédito
 function aumentarCredito(apuesta) {
+    let tiradaElemento = document.getElementById("credito-especial");
     let apuestaElemento = document.getElementById("apuesta");
     if (apuesta < apuesta_maxima) {
-        apuesta += 50;
+        apuesta += apuesta_minima;
     }
     // Actualizar el texto del elemento h2
     apuestaElemento.textContent = "crédito: " + apuesta;
+    tiradaElemento.textContent = apuesta * multi_tirada_especial;
     return apuesta;
 }
 
 // Función para disminuir el crédito
 function disminuirCredito(apuesta) {
+    let tiradaElemento = document.getElementById("credito-especial");
     let apuestaElemento = document.getElementById("apuesta");
     if (apuesta > apuesta_minima) {
-        apuesta -= 50;
+        apuesta -= apuesta_minima;
     }
     // Actualizar el texto del elemento h2
     apuestaElemento.textContent = "crédito: " + apuesta;
+    tiradaElemento.textContent = apuesta * multi_tirada_especial;
     return apuesta;
 }
 
@@ -339,33 +396,33 @@ function disminuirCredito(apuesta) {
 const imagenes = [
     {
         numero: 0,
-        valor: 1,
-        imagen: 'assets/lannister.png'
+        valor: 1.5,
+        imagen: '../assets/lannister.png'
     },
     {
         numero: 1,
         valor: 2,
-        imagen: 'assets/targaryen.png'
+        imagen: '../assets/targaryen.png'
     },
     {
         numero: 2,
-        valor: 2,
-        imagen: 'assets/baratheon.png'
+        valor: 3,
+        imagen: '../assets/baratheon.png'
     },
     {
         numero: 3,
         valor: 3,
-        imagen: 'assets/stark.png'
+        imagen: '../assets/stark.png'
     },
     {
         numero: 4,
-        valor: 4,
-        imagen: 'assets/cuervo.png'
+        valor: 5,
+        imagen: '../assets/cuervo.png'
     },
     {
         numero: 5,
         valor: 8,
-        imagen: 'assets/trono.png'
+        imagen: '../assets/trono.png'
     },
 ];
 
@@ -378,10 +435,12 @@ let ordenImagenes = [
 ];
 
 //constantes
+const multi_tirada_especial = 3;
+const rodillos = 5;
 const bloques_rodillo = 10;
 const multiplicador = 6;    // cantidad de logos
-const apuesta_minima = 100;
-const apuesta_maxima = 1500;
+const apuesta_minima = 20;
+const apuesta_maxima = 1000;
 
 // variables a usar
 let ganancia_total = 0;
@@ -390,13 +449,16 @@ let contador_total = 0;
 let contador = 0;
 let num_vueltas = 0;
 
+// Variable global para saber si es una tirada especial o no
+let tirada_especial = false;
+
 // Variable global de estado para rastrear si la animación está en curso
 let animationInProgress = false;
 
 // Variable global del saldo
+let saldo = 0;
 if (!localStorage.getItem('fondo')) {
     // Si no hay nada guardado en 'fondo', asignar el valor 0 a 'fondo' y guardarlo en localStorage
-    let saldo = 0;
     localStorage.setItem('fondo', saldo);
 } else {
     saldo = JSON.parse(localStorage.getItem("fondo"));
@@ -404,6 +466,7 @@ if (!localStorage.getItem('fondo')) {
 }
 
 // Variable del monto a apostar
+let apuesta = 0;
 if (!localStorage.getItem('credito')) {
     // Si no hay nada guardado en 'credito', asignar 'apuesta_minima' a 'apuesta' y guardarlo en localStorage
     let apuesta = apuesta_minima;
@@ -419,6 +482,10 @@ saldoElemento.textContent = "saldo: " + saldo;
 let apuestaElemento = document.getElementById("apuesta");
 apuestaElemento.textContent = "crédito: " + apuesta;
 
+let tiradaElemento = document.getElementById("credito-especial");
+tiradaElemento.textContent = apuesta * multi_tirada_especial;
+
+
 // seteo todo para que halla imagenes al ingresar
 num_vueltas = inicial(ordenImagenes, num_vueltas);
 
@@ -427,7 +494,7 @@ const button = document.getElementById('btngo');
 const boxes = document.querySelectorAll('.columna');
 
 
-// Agrega un "escuchador de eventos" al botón que se activa cuando el botón es clicado
+// Agrega un "escuchador de eventos" al botón que se activa cuando el botón es cliqueado
 button.addEventListener('click', () => {
     if (saldo >= apuesta && animationInProgress == false) {
         if (contador === 3) {
@@ -461,25 +528,79 @@ button_menos.addEventListener('click', () => {
 });
 
 
-// constantes del boton y de la ventana a cerrar
-const button_ventana = document.getElementById('btn-cerrar');
-const ventana = document.getElementById('ventana_deposito');
-
-// Agregar un event listener al botón
-button_ventana.addEventListener('click', () => {
-    ventana.style.display = 'none'; // deja de mostrar la ventana
-});
-
-
-
 // constantes del boton e input de deposito
 const button_deposito = document.getElementById('btndepo');
 const input_deposito = document.getElementById('deposito');
 button_deposito.addEventListener('click', () => {
-    if (parseInt(input_deposito.value) > 0) {
+    if (parseInt(input_deposito.value) > 0 && animationInProgress == false) {
         saldo = JSON.parse(localStorage.getItem("fondo")) + parseInt(input_deposito.value);
+        Swal.fire({
+            title: '¡Felicidades!',
+            text: 'Su transacción se ha completado con éxito. ¡Bienvenido al juego!',
+            icon: 'success',
+            confirmButtonText: 'Cerrar',
+            customClass: {
+                confirmButton: 'custom-button',
+            },
+        })
         imprimir_saldo(saldo);
-        ventana.style.display = 'block'; //  muestra la ventana
     }
 });
 
+// constantes del boton e input de retiro
+const button_retiro = document.getElementById('btn-retiro');
+const input_retiro = document.getElementById('retiro');
+button_retiro.addEventListener('click', () => {
+    if (parseInt(input_retiro.value) > 0 && parseInt(input_retiro.value) <= saldo && animationInProgress == false) {
+        saldo = JSON.parse(localStorage.getItem("fondo")) - parseInt(input_retiro.value);
+        Swal.fire({
+            title: '¡Felicidades!',
+            text: 'Su retiro se ha completado con éxito.',
+            icon: 'success',
+            confirmButtonText: 'Cerrar',
+            customClass: {
+                confirmButton: 'custom-button',
+            },
+        })
+        imprimir_saldo(saldo);
+    }
+});
+
+// constantes del boton para hacer tirada especial
+const button_mult_tiradas = document.getElementById('btn-tirada-especial');
+button_mult_tiradas.addEventListener('click', () => {
+    if (saldo >= apuesta * multi_tirada_especial && animationInProgress == false) {
+        if (contador === 3) {
+            contador = 1;
+        }
+        tirada_especial = true;
+        //Llamo a la funcion de animacion y de la que deriva todo
+        contador = animateElements(boxes, contador, ordenImagenes, apuesta);
+    }
+});
+
+
+// constantes del boton informativo
+const button_informativo = document.getElementById('btn-inf');
+button_informativo.addEventListener('click', () => {
+    fetch('../json/archivo.json')
+        .then(response => response.json())
+        .then(posts => {
+            // Construir el HTML para la lista
+            let listHTML = '<ul>';
+            posts.forEach(post => {
+                listHTML += `<li>${post.nombre} - ${post.descripcion}</li>`;
+            });
+            listHTML += '</ul>';
+
+            // Mostrar el modal de Swal.fire con la lista
+            Swal.fire({
+                title: 'Formas de ganar',
+                html: listHTML,
+                confirmButtonText: 'Cerrar'
+            });
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos:', error);
+        });
+});

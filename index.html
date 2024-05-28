@@ -11,11 +11,19 @@
 <body>
     <header class="header-container">
         <p>BILLETERA</p>
-        <div class="input-button-container">
-            <label for="deposito">Monto a depositar:</label>
-            <input type="number" id="deposito" min="0" max="10000" step="10">
-            <button class="boton-deposito" id="btndepo">DEPOSITAR</button>
-        </div>
+        <section>
+            <article class="input-button-container">
+                <label for="deposito">Monto a depositar:</label>
+                <input type="number" id="deposito" min="0" max="10000" step="10">
+                <button class="boton-deposito boton-header" id="btndepo">DEPOSITAR</button>
+            </article>
+            <article class="input-button-container">
+                <label for="retiro">Monto a retirar:</label>
+                <input type="number" id="retiro" min="0" max="10000" step="10">
+                <button class="boton-retiro boton-header" id="btn-retiro">RETIRAR</button>
+            </article>
+        </section>
+        
     </header>
 
     <main>
@@ -23,13 +31,6 @@
             <h1>GOT Slot</h1>
         </section>
 
-        <section class="ventana" id="ventana_deposito">
-            <div class="ventana_conteiner">
-                <p>¡Transacción realizada!</p>
-                <button class="boton-cerrar" id="btn-cerrar">Cerrar</button>
-            </div>
-
-        </section>
 
         <section class="conteiner">
 
@@ -63,13 +64,28 @@
                 <button class="credito-boton" id="btn-mas">+</button>
                 <p class="credito-texto" id="apuesta">crédito: </p>
                 <button class="credito-boton" id="btn-menos">-</button>
-
             </article>
+
+            <article class="credito">
+                <button id="btn-tirada-especial">Tirada Especial (X3)</button>
+                <p id="credito-especial">100</p>
+            </article>
+
             <article id="mostrar_ganancia">
+            </article>
+
+            <article class="informacion">
+                <button class="boton-informativo" id="btn-inf">Info</button>
             </article>
         </section>
     </main>
-    <footer></footer>
+    <footer>
+    </footer>
+
+   
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="js/main.js"></script>
 </body>
 

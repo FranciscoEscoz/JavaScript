@@ -397,12 +397,12 @@ const imagenes = [
     {
         numero: 0,
         valor: 1.5,
-        imagen: '../assets/lannister.png'
+        imagen: 'assets/lannister.png'
     },
     {
         numero: 1,
         valor: 2,
-        imagen: '../assets/targaryen.png'
+        imagen: 'assets/targaryen.png'
     },
     {
         numero: 2,

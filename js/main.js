@@ -580,7 +580,7 @@ button_mult_tiradas.addEventListener('click', () => {
 // constantes del boton informativo
 const button_informativo = document.getElementById('btn-inf');
 button_informativo.addEventListener('click', () => {
-    fetch('../json/archivo.json')
+    fetch('json/archivo.json')
         .then(response => response.json())
         .then(posts => {
             // Construir el HTML para la lista

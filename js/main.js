@@ -577,7 +577,6 @@ button_mult_tiradas.addEventListener('click', () => {
     }
 });
 
-
 // constantes del boton informativo
 const button_informativo = document.getElementById('btn-inf');
 button_informativo.addEventListener('click', () => {
